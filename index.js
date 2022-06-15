@@ -1,3 +1,4 @@
+//DESAFIO DE SERVIDOR CON EXPRESS
 const express =  require("express");
 const fs = require ("fs");
 const app = express();
@@ -55,30 +56,3 @@ app.listen(port, (error)=>{
         console.log('Hubo un error al iniciar el servidor');
     }
 })
-
-
-
-
-//Clase 5
-/* 
-app.get("/",(req,res) => {
-    res.send(`<h1 style="color:blue" > Bienvenidos al mi servidor express </h1>`)
-})
-
-
-
-app.get("/fyh/",(req, res) =>{
-    const date = new Date()
-    res.json({fyh:date})
-})
-
-app.listen(port, (error) => {
-    if(!error){
-    
-    console.log(`Servidor en express en el puerto ${port}`)}
-
-    else{
-        console.log("Error al iniciar al servidor")
-    }
-})
-*/
