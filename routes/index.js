@@ -1,6 +1,8 @@
 //Required modules
 const { Router } = require("express")
+const { request } = require("http")
 const Module = require("module")
+const { addAbortSignal } = require("stream")
 const { text } = require("stream/consumers")
 const router = Router()
 let productos = require("../data/productos")
@@ -31,10 +33,20 @@ router.get("/productos/:id", (req , res) => {
 //Productos POST
 router.post('/productos', (req, res) =>{
     let { title, price, thumbnail } = req.body
-    console.log(title, price, thumbnail)
-    res.sendStatus(201)
-  //res.send('POST request to the homepage')
+    const id= productos.length+1 
+    const nuevoProducto = {...req.body, id}
+    productos.push(nuevoProducto);
+    res.json(productos)
 })
+
+//Productos PUT by ID
+router.put('/productos/:id',(req, res) => {
+  const { id } = req.params
+  let { title, price, thumbnail } = req.body
+  const productFind = productos.find(i => i.id === id)
+  res.json (productos)
+})
+
 //Productos DELETE by ID
 router.delete ("/productos/:id", (req , res) => {
     let id = Number( req.params.id )
