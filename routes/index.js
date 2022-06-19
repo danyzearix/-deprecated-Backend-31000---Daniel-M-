@@ -41,10 +41,17 @@ router.post('/productos', (req, res) =>{
 
 //Productos PUT by ID
 router.put('/productos/:id',(req, res) => {
-  const { id } = req.params
-  let { title, price, thumbnail } = req.body
-  const productFind = productos.find(i => i.id === id)
-  res.json (productos)
+    const id = req.params.id
+    const body = req.body
+    productos.filter(producto => {
+        if (producto.id == id) {
+            producto.title = body.title
+            producto.price = body.price
+            producto.thumbnail = body.thumbnail
+
+        }
+    })
+    return res.json(productos)
 })
 
 //Productos DELETE by ID
